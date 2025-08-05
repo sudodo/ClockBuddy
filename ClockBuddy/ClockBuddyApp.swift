@@ -4,11 +4,13 @@ import AppKit
 @main
 struct ClockBuddyApp: App {
     @State private var model = ClockModel()
+    @State private var appSettings = AppSettings()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(model)
+                .environment(appSettings)
                 .task {
                     await model.requestCalendarAccess()
                 }
@@ -16,6 +18,20 @@ struct ClockBuddyApp: App {
         }
         .windowStyle(.hiddenTitleBar)
         .windowResizability(.contentSize)
+        .commands {
+            CommandGroup(replacing: .appSettings) {
+                SettingsLink {
+                    Text("Settings...")
+                }
+                .keyboardShortcut(",", modifiers: .command)
+            }
+        }
+        
+        // Settings window
+        Settings {
+            SettingsView()
+                .environment(appSettings)
+        }
     }
 }
 
