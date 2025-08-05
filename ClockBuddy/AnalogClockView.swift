@@ -58,12 +58,14 @@ struct AnalogClockView: View {
                 .offset(y: -55)
                 .rotationEffect(minuteAngle)
             
-            // Second hand
-            Rectangle()
-                .fill(.red)
-                .frame(width: 2, height: 120)
-                .offset(y: -60)
-                .rotationEffect(secondAngle)
+            // Second hand (only if enabled)
+            if showSecondsHand {
+                Rectangle()
+                    .fill(.red)
+                    .frame(width: 2, height: 120)
+                    .offset(y: -60)
+                    .rotationEffect(secondAngle)
+            }
             
             // Center dot
             Circle()
