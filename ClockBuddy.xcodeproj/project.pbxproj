@@ -1,0 +1,546 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXContainerItemProxy section */
+		1B5C24FB2E41E25E00E63B0F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B5C24E42E41E25C00E63B0F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B5C24EB2E41E25C00E63B0F;
+			remoteInfo = ClockBuddy;
+		};
+		1B5C25052E41E25E00E63B0F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1B5C24E42E41E25C00E63B0F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1B5C24EB2E41E25C00E63B0F;
+			remoteInfo = ClockBuddy;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1B5C24EC2E41E25C00E63B0F /* ClockBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ClockBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B5C24FA2E41E25E00E63B0F /* ClockBuddyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClockBuddyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B5C25042E41E25E00E63B0F /* ClockBuddyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ClockBuddyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		1B5C24EE2E41E25C00E63B0F /* ClockBuddy */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ClockBuddy;
+			sourceTree = "<group>";
+		};
+		1B5C24FD2E41E25E00E63B0F /* ClockBuddyTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ClockBuddyTests;
+			sourceTree = "<group>";
+		};
+		1B5C25072E41E25E00E63B0F /* ClockBuddyUITests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = ClockBuddyUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1B5C24E92E41E25C00E63B0F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B5C24F72E41E25E00E63B0F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B5C25012E41E25E00E63B0F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1B5C24E32E41E25C00E63B0F = {
+			isa = PBXGroup;
+			children = (
+				1B5C24EE2E41E25C00E63B0F /* ClockBuddy */,
+				1B5C24FD2E41E25E00E63B0F /* ClockBuddyTests */,
+				1B5C25072E41E25E00E63B0F /* ClockBuddyUITests */,
+				1B5C24ED2E41E25C00E63B0F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		1B5C24ED2E41E25C00E63B0F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				1B5C24EC2E41E25C00E63B0F /* ClockBuddy.app */,
+				1B5C24FA2E41E25E00E63B0F /* ClockBuddyTests.xctest */,
+				1B5C25042E41E25E00E63B0F /* ClockBuddyUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		1B5C24EB2E41E25C00E63B0F /* ClockBuddy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B5C250E2E41E25E00E63B0F /* Build configuration list for PBXNativeTarget "ClockBuddy" */;
+			buildPhases = (
+				1B5C24E82E41E25C00E63B0F /* Sources */,
+				1B5C24E92E41E25C00E63B0F /* Frameworks */,
+				1B5C24EA2E41E25C00E63B0F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				1B5C24EE2E41E25C00E63B0F /* ClockBuddy */,
+			);
+			name = ClockBuddy;
+			packageProductDependencies = (
+			);
+			productName = ClockBuddy;
+			productReference = 1B5C24EC2E41E25C00E63B0F /* ClockBuddy.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1B5C24F92E41E25E00E63B0F /* ClockBuddyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B5C25112E41E25E00E63B0F /* Build configuration list for PBXNativeTarget "ClockBuddyTests" */;
+			buildPhases = (
+				1B5C24F62E41E25E00E63B0F /* Sources */,
+				1B5C24F72E41E25E00E63B0F /* Frameworks */,
+				1B5C24F82E41E25E00E63B0F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1B5C24FC2E41E25E00E63B0F /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1B5C24FD2E41E25E00E63B0F /* ClockBuddyTests */,
+			);
+			name = ClockBuddyTests;
+			packageProductDependencies = (
+			);
+			productName = ClockBuddyTests;
+			productReference = 1B5C24FA2E41E25E00E63B0F /* ClockBuddyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		1B5C25032E41E25E00E63B0F /* ClockBuddyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1B5C25142E41E25E00E63B0F /* Build configuration list for PBXNativeTarget "ClockBuddyUITests" */;
+			buildPhases = (
+				1B5C25002E41E25E00E63B0F /* Sources */,
+				1B5C25012E41E25E00E63B0F /* Frameworks */,
+				1B5C25022E41E25E00E63B0F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				1B5C25062E41E25E00E63B0F /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				1B5C25072E41E25E00E63B0F /* ClockBuddyUITests */,
+			);
+			name = ClockBuddyUITests;
+			packageProductDependencies = (
+			);
+			productName = ClockBuddyUITests;
+			productReference = 1B5C25042E41E25E00E63B0F /* ClockBuddyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1B5C24E42E41E25C00E63B0F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1640;
+				LastUpgradeCheck = 1640;
+				TargetAttributes = {
+					1B5C24EB2E41E25C00E63B0F = {
+						CreatedOnToolsVersion = 16.4;
+					};
+					1B5C24F92E41E25E00E63B0F = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 1B5C24EB2E41E25C00E63B0F;
+					};
+					1B5C25032E41E25E00E63B0F = {
+						CreatedOnToolsVersion = 16.4;
+						TestTargetID = 1B5C24EB2E41E25C00E63B0F;
+					};
+				};
+			};
+			buildConfigurationList = 1B5C24E72E41E25C00E63B0F /* Build configuration list for PBXProject "ClockBuddy" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 1B5C24E32E41E25C00E63B0F;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1B5C24ED2E41E25C00E63B0F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				1B5C24EB2E41E25C00E63B0F /* ClockBuddy */,
+				1B5C24F92E41E25E00E63B0F /* ClockBuddyTests */,
+				1B5C25032E41E25E00E63B0F /* ClockBuddyUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		1B5C24EA2E41E25C00E63B0F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B5C24F82E41E25E00E63B0F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B5C25022E41E25E00E63B0F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1B5C24E82E41E25C00E63B0F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B5C24F62E41E25E00E63B0F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1B5C25002E41E25E00E63B0F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		1B5C24FC2E41E25E00E63B0F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B5C24EB2E41E25C00E63B0F /* ClockBuddy */;
+			targetProxy = 1B5C24FB2E41E25E00E63B0F /* PBXContainerItemProxy */;
+		};
+		1B5C25062E41E25E00E63B0F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1B5C24EB2E41E25C00E63B0F /* ClockBuddy */;
+			targetProxy = 1B5C25052E41E25E00E63B0F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1B5C250C2E41E25E00E63B0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		1B5C250D2E41E25E00E63B0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		1B5C250F2E41E25E00E63B0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ClockBuddy/ClockBuddy.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dr.sudo.ClockBuddy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1B5C25102E41E25E00E63B0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ClockBuddy/ClockBuddy.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dr.sudo.ClockBuddy;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		1B5C25122E41E25E00E63B0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dr.sudo.ClockBuddyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ClockBuddy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ClockBuddy";
+			};
+			name = Debug;
+		};
+		1B5C25132E41E25E00E63B0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dr.sudo.ClockBuddyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ClockBuddy.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/ClockBuddy";
+			};
+			name = Release;
+		};
+		1B5C25152E41E25E00E63B0F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dr.sudo.ClockBuddyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = ClockBuddy;
+			};
+			name = Debug;
+		};
+		1B5C25162E41E25E00E63B0F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dr.sudo.ClockBuddyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = ClockBuddy;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1B5C24E72E41E25C00E63B0F /* Build configuration list for PBXProject "ClockBuddy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B5C250C2E41E25E00E63B0F /* Debug */,
+				1B5C250D2E41E25E00E63B0F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1B5C250E2E41E25E00E63B0F /* Build configuration list for PBXNativeTarget "ClockBuddy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B5C250F2E41E25E00E63B0F /* Debug */,
+				1B5C25102E41E25E00E63B0F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1B5C25112E41E25E00E63B0F /* Build configuration list for PBXNativeTarget "ClockBuddyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B5C25122E41E25E00E63B0F /* Debug */,
+				1B5C25132E41E25E00E63B0F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1B5C25142E41E25E00E63B0F /* Build configuration list for PBXNativeTarget "ClockBuddyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1B5C25152E41E25E00E63B0F /* Debug */,
+				1B5C25162E41E25E00E63B0F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1B5C24E42E41E25C00E63B0F /* Project object */;
+}
