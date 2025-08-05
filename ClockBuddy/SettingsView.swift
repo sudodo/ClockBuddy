@@ -28,6 +28,8 @@ struct SettingsView: View {
                     
                     if settings.isAnalog {
                         Toggle("Show Seconds Hand", isOn: $settings.showSecondsHand)
+                    } else {
+                        Toggle("Show Seconds", isOn: $settings.showSecondsDigital)
                     }
                 }
                 
@@ -68,15 +70,41 @@ struct SettingsView: View {
                     }
                 }
                 
+                // Font Size Section
+                Section("Font Sizes") {
+                    HStack {
+                        Text("Time Font Size")
+                        Slider(value: $settings.timeFontSize, in: 24...96, step: 4) {
+                            Text("Time Font Size")
+                        }
+                        Text("\(Int(settings.timeFontSize))pt")
+                            .monospacedDigit()
+                            .frame(width: 45, alignment: .trailing)
+                    }
+                    
+                    HStack {
+                        Text("Date Font Size")
+                        Slider(value: $settings.dateFontSize, in: 12...36, step: 2) {
+                            Text("Date Font Size")
+                        }
+                        Text("\(Int(settings.dateFontSize))pt")
+                            .monospacedDigit()
+                            .frame(width: 45, alignment: .trailing)
+                    }
+                }
+                
                 // Quick Actions Section
                 Section("Quick Actions") {
                     HStack {
                         Button("Reset to Defaults") {
                             withAnimation {
-                                settings.isAnalog = true
+                                settings.isAnalog = false // Digital by default
                                 settings.showSecondsHand = true
+                                settings.showSecondsDigital = false // No seconds by default
                                 settings.windowOpacity = 0.9
                                 settings.windowScale = 1.0
+                                settings.timeFontSize = 48
+                                settings.dateFontSize = 18
                             }
                         }
                         .buttonStyle(.plain)

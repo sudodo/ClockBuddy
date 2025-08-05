@@ -61,6 +61,9 @@ struct WindowAccessor: NSViewRepresentable {
                 
                 // Disable full screen button
                 window.collectionBehavior.insert(.fullScreenNone)
+                
+                // Enable window dragging by background
+                window.isMovableByWindowBackground = true
             }
         }
         

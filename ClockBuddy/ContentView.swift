@@ -24,7 +24,6 @@ struct ContentView: View {
                         .scaleEffect(settings.windowScale)
                 } else {
                     DigitalClockView(date: currentDate)
-                        .scaleEffect(settings.windowScale)
                 }
             }
             .foregroundStyle(clockColor)
