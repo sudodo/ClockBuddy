@@ -38,16 +38,24 @@ struct DigitalClockView: View {
     private var eventTimeText: String? {
         guard let eventTime = model.nextEventTime else { return nil }
         
-        let components = Calendar.current.dateComponents([.hour, .minute], from: date, to: eventTime)
-        let hours = components.hour ?? 0
-        let minutes = components.minute ?? 0
-        
-        if hours > 0 {
-            return "\(hours)時間後"
-        } else if minutes > 0 {
-            return "\(minutes)分後"
+        // If urgent (red color), show start time instead of time until event
+        if model.hasUrgentEvents {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "HH:mm"
+            return formatter.string(from: eventTime)
         } else {
-            return "まもなく"
+            // Show time until event
+            let components = Calendar.current.dateComponents([.hour, .minute], from: date, to: eventTime)
+            let hours = components.hour ?? 0
+            let minutes = components.minute ?? 0
+            
+            if hours > 0 {
+                return "\(hours)時間後"
+            } else if minutes > 0 {
+                return "\(minutes)分後"
+            } else {
+                return "まもなく"
+            }
         }
     }
     
