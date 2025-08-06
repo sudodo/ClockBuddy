@@ -30,6 +30,7 @@ struct SettingsView: View {
                         Toggle("Show Seconds Hand", isOn: $settings.showSecondsHand)
                     } else {
                         Toggle("Show Seconds", isOn: $settings.showSecondsDigital)
+                        Toggle("Blink Colon", isOn: $settings.blinkColon)
                     }
                 }
                 
@@ -91,6 +92,60 @@ struct SettingsView: View {
                             .monospacedDigit()
                             .frame(width: 45, alignment: .trailing)
                     }
+                    
+                    HStack {
+                        Text("Event Font Size")
+                        Slider(value: $settings.eventFontSize, in: 10...24, step: 1) {
+                            Text("Event Font Size")
+                        }
+                        Text("\(Int(settings.eventFontSize))pt")
+                            .monospacedDigit()
+                            .frame(width: 45, alignment: .trailing)
+                    }
+                }
+                
+                // Calendar Section
+                Section("Calendar Colors") {
+                    HStack {
+                        Text("Urgent Event Threshold")
+                        Slider(value: Binding(
+                            get: { Double(settings.urgentEventThreshold) },
+                            set: { settings.urgentEventThreshold = Int($0) }
+                        ), in: 1...24, step: 1) {
+                            Text("Hours")
+                        }
+                        Text("\(settings.urgentEventThreshold)h")
+                            .monospacedDigit()
+                            .frame(width: 35, alignment: .trailing)
+                    }
+                    
+                    VStack(alignment: .leading, spacing: 8) {
+                        Label("No events", systemImage: "circle.fill")
+                            .foregroundStyle(.cyan)
+                        Label("Events today", systemImage: "circle.fill")
+                            .foregroundStyle(Color(red: 1.0, green: 0.84, blue: 0.0))
+                        Label("Events within \(settings.urgentEventThreshold)h", systemImage: "circle.fill")
+                            .foregroundStyle(.red)
+                    }
+                    .font(.caption)
+                }
+                
+                // Event Display Section
+                Section("Event Display") {
+                    Toggle("Show Year in Date", isOn: $settings.showYear)
+                    
+                    HStack {
+                        Text("Event Name Length")
+                        Slider(value: Binding(
+                            get: { Double(settings.eventNameLength) },
+                            set: { settings.eventNameLength = Int($0) }
+                        ), in: 5...30, step: 1) {
+                            Text("Characters")
+                        }
+                        Text("\(settings.eventNameLength)文字")
+                            .monospacedDigit()
+                            .frame(width: 50, alignment: .trailing)
+                    }
                 }
                 
                 // Quick Actions Section
@@ -101,10 +156,15 @@ struct SettingsView: View {
                                 settings.isAnalog = false // Digital by default
                                 settings.showSecondsHand = true
                                 settings.showSecondsDigital = false // No seconds by default
+                                settings.blinkColon = false
                                 settings.windowOpacity = 0.9
                                 settings.windowScale = 1.0
                                 settings.timeFontSize = 48
                                 settings.dateFontSize = 18
+                                settings.urgentEventThreshold = 3
+                                settings.showYear = true
+                                settings.eventNameLength = 10
+                                settings.eventFontSize = 14
                             }
                         }
                         .buttonStyle(.plain)
@@ -116,7 +176,7 @@ struct SettingsView: View {
             }
             .formStyle(.grouped)
         }
-        .frame(width: 450, height: 350)
+        .frame(width: 450, height: 500)
         .background(Color(NSColor.windowBackgroundColor))
     }
 }

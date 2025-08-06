@@ -8,7 +8,13 @@ struct ContentView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
     var clockColor: Color {
-        model.hasUpcomingEvents ? .pink : .cyan
+        if model.hasUrgentEvents {
+            return .red // 緊急：n時間以内に予定
+        } else if model.hasUpcomingEvents {
+            return Color(red: 1.0, green: 0.84, blue: 0.0) // ゴールド：今日予定あり
+        } else {
+            return .cyan // 青：予定なし
+        }
     }
     
     var body: some View {
@@ -34,12 +40,16 @@ struct ContentView: View {
         .onReceive(timer) { _ in
             currentDate = Date()
             
-            // Refresh calendar events every 30 seconds
-            if Calendar.current.component(.second, from: currentDate) % 30 == 0 {
+            // Refresh calendar events every 10 seconds
+            if Calendar.current.component(.second, from: currentDate) % 10 == 0 {
                 Task {
-                    await model.refreshEvents()
+                    await model.refreshEvents(urgentThreshold: settings.urgentEventThreshold)
                 }
             }
+        }
+        .task {
+            // Initial refresh when view appears
+            await model.refreshEvents(urgentThreshold: settings.urgentEventThreshold)
         }
     }
 }
