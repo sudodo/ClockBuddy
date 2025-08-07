@@ -117,6 +117,12 @@ struct DigitalClockView: View {
                 .minimumScaleFactor(0.5)
                 .lineLimit(1)
                 .opacity(0.8)
+            } else if !model.hasUpcomingEvents && settings.showNoEventMessage {
+                Text("今日は予定なし")
+                    .font(.system(size: settings.eventFontSize * settings.windowScale, weight: .regular))
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(1)
+                    .opacity(0.8)
             }
         }
         .padding(.horizontal, 20 * settings.windowScale)

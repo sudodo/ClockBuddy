@@ -133,6 +133,7 @@ struct SettingsView: View {
                 // Event Display Section
                 Section("Event Display") {
                     Toggle("Show Year in Date", isOn: $settings.showYear)
+                    Toggle("Show \"今日は予定なし\"", isOn: $settings.showNoEventMessage)
                     
                     HStack {
                         Text("Event Name Length")
@@ -165,6 +166,7 @@ struct SettingsView: View {
                                 settings.showYear = true
                                 settings.eventNameLength = 10
                                 settings.eventFontSize = 14
+                                settings.showNoEventMessage = true
                             }
                         }
                         .buttonStyle(.plain)

@@ -53,6 +53,10 @@ final class AppSettings {
         didSet { defaults.set(eventFontSize, forKey: "eventFontSize") }
     }
     
+    var showNoEventMessage: Bool {
+        didSet { defaults.set(showNoEventMessage, forKey: "showNoEventMessage") }
+    }
+    
     init() {
         // Load saved settings or use defaults
         self.isAnalog = defaults.object(forKey: "isAnalog") as? Bool ?? false // Digital by default
@@ -67,6 +71,7 @@ final class AppSettings {
         self.showYear = defaults.object(forKey: "showYear") as? Bool ?? true
         self.eventNameLength = defaults.object(forKey: "eventNameLength") as? Int ?? 10
         self.eventFontSize = defaults.object(forKey: "eventFontSize") as? CGFloat ?? 14
+        self.showNoEventMessage = defaults.object(forKey: "showNoEventMessage") as? Bool ?? true
     }
     
     // Computed property for window size
