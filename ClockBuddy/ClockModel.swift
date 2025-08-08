@@ -9,6 +9,7 @@ final class ClockModel {
     private(set) var hasUrgentEvents = false
     private(set) var nextEventTime: Date?
     private(set) var nextEventTitle: String?
+    private(set) var isWithin30Minutes = false
     
     init() {
         // Initialize event store only when needed
@@ -80,12 +81,20 @@ final class ClockModel {
             
             hasUrgentEvents = hoursUntilEvent < urgentThreshold
             
+            // Check if event is within 30 minutes
+            let minutesUntilEvent = Calendar.current.dateComponents([.minute], 
+                                                                   from: now, 
+                                                                   to: nextEvent.startDate).minute ?? 60
+            isWithin30Minutes = minutesUntilEvent <= 30
+            
             print("Next event: \(nextEvent.title ?? "Untitled") at \(nextEvent.startDate)")
             print("Hours until event: \(hoursUntilEvent), Urgent: \(hasUrgentEvents)")
+            print("Minutes until event: \(minutesUntilEvent), Within 30 min: \(isWithin30Minutes)")
         } else {
             nextEventTime = nil
             nextEventTitle = nil
             hasUrgentEvents = false
+            isWithin30Minutes = false
         }
         
         hasUpcomingEvents = !upcomingEvents.isEmpty

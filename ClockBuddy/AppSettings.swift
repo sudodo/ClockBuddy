@@ -57,6 +57,10 @@ final class AppSettings {
         didSet { defaults.set(showNoEventMessage, forKey: "showNoEventMessage") }
     }
     
+    var blinkBeforeEvent: Bool {
+        didSet { defaults.set(blinkBeforeEvent, forKey: "blinkBeforeEvent") }
+    }
+    
     init() {
         // Load saved settings or use defaults
         self.isAnalog = defaults.object(forKey: "isAnalog") as? Bool ?? false // Digital by default
@@ -72,6 +76,7 @@ final class AppSettings {
         self.eventNameLength = defaults.object(forKey: "eventNameLength") as? Int ?? 10
         self.eventFontSize = defaults.object(forKey: "eventFontSize") as? CGFloat ?? 14
         self.showNoEventMessage = defaults.object(forKey: "showNoEventMessage") as? Bool ?? true
+        self.blinkBeforeEvent = defaults.object(forKey: "blinkBeforeEvent") as? Bool ?? false
     }
     
     // Computed property for window size

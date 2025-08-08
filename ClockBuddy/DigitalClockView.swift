@@ -4,9 +4,14 @@ struct DigitalClockView: View {
     let date: Date
     @Environment(AppSettings.self) private var settings
     @Environment(ClockModel.self) private var model
+    @State private var showTimeForBlink = true
     
     private var showColon: Bool {
         !settings.blinkColon || Calendar.current.component(.second, from: date) % 2 == 0
+    }
+    
+    private var shouldBlinkTime: Bool {
+        settings.blinkBeforeEvent && model.isWithin30Minutes
     }
     
     private var timeComponents: (hours: String, minutes: String, seconds: String?) {
@@ -97,6 +102,26 @@ struct DigitalClockView: View {
             }
             .minimumScaleFactor(0.5)
             .lineLimit(1)
+            .opacity(shouldBlinkTime ? (showTimeForBlink ? 1.0 : 0.3) : 1.0)
+            .animation(shouldBlinkTime ? .easeInOut(duration: 0.5).repeatForever(autoreverses: true) : .default, value: showTimeForBlink)
+            .onAppear {
+                if shouldBlinkTime {
+                    withAnimation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true)) {
+                        showTimeForBlink.toggle()
+                    }
+                }
+            }
+            .onChange(of: shouldBlinkTime) { oldValue, newValue in
+                if newValue && !oldValue {
+                    withAnimation(.easeInOut(duration: 0.5).repeatForever(autoreverses: true)) {
+                        showTimeForBlink.toggle()
+                    }
+                } else if !newValue && oldValue {
+                    withAnimation(.default) {
+                        showTimeForBlink = true
+                    }
+                }
+            }
             
             // Date with weekday
             HStack(spacing: 0) {

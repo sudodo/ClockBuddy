@@ -134,6 +134,7 @@ struct SettingsView: View {
                 Section("Event Display") {
                     Toggle("Show Year in Date", isOn: $settings.showYear)
                     Toggle("Show \"今日は予定なし\"", isOn: $settings.showNoEventMessage)
+                    Toggle("Blink Time Before Event (30 min)", isOn: $settings.blinkBeforeEvent)
                     
                     HStack {
                         Text("Event Name Length")
@@ -167,6 +168,7 @@ struct SettingsView: View {
                                 settings.eventNameLength = 10
                                 settings.eventFontSize = 14
                                 settings.showNoEventMessage = true
+                                settings.blinkBeforeEvent = false
                             }
                         }
                         .buttonStyle(.plain)
