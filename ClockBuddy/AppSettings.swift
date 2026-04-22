@@ -32,6 +32,10 @@ final class AppSettings {
     var timeFontSize: CGFloat {
         didSet { defaults.set(timeFontSize, forKey: "timeFontSize") }
     }
+
+    var timeFontSizeDuringTimer: CGFloat {
+        didSet { defaults.set(timeFontSizeDuringTimer, forKey: "timeFontSizeDuringTimer") }
+    }
     
     var dateFontSize: CGFloat {
         didSet { defaults.set(dateFontSize, forKey: "dateFontSize") }
@@ -60,7 +64,15 @@ final class AppSettings {
     var blinkBeforeEvent: Bool {
         didSet { defaults.set(blinkBeforeEvent, forKey: "blinkBeforeEvent") }
     }
-    
+
+    var timerDefaultMinutes: Int {
+        didSet { defaults.set(timerDefaultMinutes, forKey: "timerDefaultMinutes") }
+    }
+
+    var timerFontSize: CGFloat {
+        didSet { defaults.set(timerFontSize, forKey: "timerFontSize") }
+    }
+
     init() {
         // Load saved settings or use defaults
         self.isAnalog = defaults.object(forKey: "isAnalog") as? Bool ?? false // Digital by default
@@ -70,6 +82,7 @@ final class AppSettings {
         self.windowOpacity = defaults.object(forKey: "windowOpacity") as? Double ?? 0.9
         self.windowScale = defaults.object(forKey: "windowScale") as? CGFloat ?? 1.0
         self.timeFontSize = defaults.object(forKey: "timeFontSize") as? CGFloat ?? 48
+        self.timeFontSizeDuringTimer = defaults.object(forKey: "timeFontSizeDuringTimer") as? CGFloat ?? 32
         self.dateFontSize = defaults.object(forKey: "dateFontSize") as? CGFloat ?? 18
         self.urgentEventThreshold = defaults.object(forKey: "urgentEventThreshold") as? Int ?? 3 // Default 3 hours
         self.showYear = defaults.object(forKey: "showYear") as? Bool ?? true
@@ -77,6 +90,8 @@ final class AppSettings {
         self.eventFontSize = defaults.object(forKey: "eventFontSize") as? CGFloat ?? 14
         self.showNoEventMessage = defaults.object(forKey: "showNoEventMessage") as? Bool ?? true
         self.blinkBeforeEvent = defaults.object(forKey: "blinkBeforeEvent") as? Bool ?? false
+        self.timerDefaultMinutes = defaults.object(forKey: "timerDefaultMinutes") as? Int ?? 60
+        self.timerFontSize = defaults.object(forKey: "timerFontSize") as? CGFloat ?? 20
     }
     
     // Computed property for window size

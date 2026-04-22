@@ -82,7 +82,17 @@ struct SettingsView: View {
                             .monospacedDigit()
                             .frame(width: 45, alignment: .trailing)
                     }
-                    
+
+                    HStack {
+                        Text("Time Font Size (Timer Running)")
+                        Slider(value: $settings.timeFontSizeDuringTimer, in: 16...96, step: 4) {
+                            Text("Time Font Size (Timer Running)")
+                        }
+                        Text("\(Int(settings.timeFontSizeDuringTimer))pt")
+                            .monospacedDigit()
+                            .frame(width: 45, alignment: .trailing)
+                    }
+
                     HStack {
                         Text("Date Font Size")
                         Slider(value: $settings.dateFontSize, in: 12...36, step: 2) {
@@ -99,6 +109,16 @@ struct SettingsView: View {
                             Text("Event Font Size")
                         }
                         Text("\(Int(settings.eventFontSize))pt")
+                            .monospacedDigit()
+                            .frame(width: 45, alignment: .trailing)
+                    }
+
+                    HStack {
+                        Text("Timer Font Size")
+                        Slider(value: $settings.timerFontSize, in: 12...48, step: 1) {
+                            Text("Timer Font Size")
+                        }
+                        Text("\(Int(settings.timerFontSize))pt")
                             .monospacedDigit()
                             .frame(width: 45, alignment: .trailing)
                     }
@@ -162,6 +182,7 @@ struct SettingsView: View {
                                 settings.windowOpacity = 0.9
                                 settings.windowScale = 1.0
                                 settings.timeFontSize = 48
+                                settings.timeFontSizeDuringTimer = 32
                                 settings.dateFontSize = 18
                                 settings.urgentEventThreshold = 3
                                 settings.showYear = true
@@ -169,6 +190,7 @@ struct SettingsView: View {
                                 settings.eventFontSize = 14
                                 settings.showNoEventMessage = true
                                 settings.blinkBeforeEvent = false
+                                settings.timerFontSize = 20
                             }
                         }
                         .buttonStyle(.plain)

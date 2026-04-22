@@ -5,12 +5,14 @@ import AppKit
 struct ClockBuddyApp: App {
     @State private var model = ClockModel()
     @State private var appSettings = AppSettings()
-    
+    @State private var timerModel = TimerModel()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environment(model)
                 .environment(appSettings)
+                .environment(timerModel)
                 .task {
                     await model.requestCalendarAccess()
                 }
