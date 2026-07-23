@@ -73,6 +73,10 @@ final class AppSettings {
         didSet { defaults.set(timerFontSize, forKey: "timerFontSize") }
     }
 
+    var overtimeAnnouncementMinutes: Int {
+        didSet { defaults.set(overtimeAnnouncementMinutes, forKey: "overtimeAnnouncementMinutes") }
+    }
+
     // ntfy push notification (iPhone) — MVP fires only at remaining 10 min and on completion.
     // ntfyMarkerMinutes / ntfyNotifyOnComplete are stored but currently not exposed in the UI;
     // a future settings panel can let the user pick any subset of timer markers + completion.
@@ -115,6 +119,7 @@ final class AppSettings {
         self.blinkBeforeEvent = defaults.object(forKey: "blinkBeforeEvent") as? Bool ?? false
         self.timerDefaultMinutes = defaults.object(forKey: "timerDefaultMinutes") as? Int ?? 60
         self.timerFontSize = defaults.object(forKey: "timerFontSize") as? CGFloat ?? 20
+        self.overtimeAnnouncementMinutes = defaults.object(forKey: "overtimeAnnouncementMinutes") as? Int ?? 15
         self.ntfyEnabled = defaults.object(forKey: "ntfyEnabled") as? Bool ?? false
         self.ntfyTopic = defaults.object(forKey: "ntfyTopic") as? String ?? ""
         self.ntfyServerURL = defaults.object(forKey: "ntfyServerURL") as? String ?? "https://ntfy.sh"

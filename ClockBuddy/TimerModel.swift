@@ -20,6 +20,7 @@ final class TimerModel {
     @ObservationIgnored private var pausedRemaining: Int = 0
     @ObservationIgnored private var playedMarkers: Set<Int> = []
     @ObservationIgnored private var overtimeStartDate: Date?
+    @ObservationIgnored private var nextOvertimeAnnouncementSeconds: Int = 0
 
     static let markerMinutes = [30, 15, 10, 5]
 
@@ -84,6 +85,7 @@ final class TimerModel {
         endDate = nil
         pausedRemaining = 0
         overtimeStartDate = nil
+        nextOvertimeAnnouncementSeconds = 0
         playedMarkers.removeAll()
     }
 
@@ -101,6 +103,7 @@ final class TimerModel {
 
         if isOvertime, let start = overtimeStartDate {
             overtimeSeconds = max(0, Int(Date().timeIntervalSince(start).rounded()))
+            checkOvertimeAnnouncement()
             return
         }
 
@@ -127,7 +130,17 @@ final class TimerModel {
         remainingSeconds = 0
         overtimeSeconds = 0
         overtimeStartDate = Date()
+        nextOvertimeAnnouncementSeconds = max(1, settings.overtimeAnnouncementMinutes) * 60
         isOvertime = true
+    }
+
+    private func checkOvertimeAnnouncement() {
+        let interval = max(1, settings.overtimeAnnouncementMinutes) * 60
+        while overtimeSeconds >= nextOvertimeAnnouncementSeconds {
+            let minutes = nextOvertimeAnnouncementSeconds / 60
+            voicePlayer.playOvertimeAnnouncement(minutes: minutes)
+            nextOvertimeAnnouncementSeconds += interval
+        }
     }
 
     private func sendNtfyForMarker(minutes: Int) {

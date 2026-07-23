@@ -170,6 +170,23 @@ struct SettingsView: View {
                     }
                 }
                 
+                // Timer Voice Section
+                Section("Timer Voice") {
+                    HStack {
+                        Text("Overtime Voice Interval")
+                        Spacer()
+                        Stepper("\(settings.overtimeAnnouncementMinutes) min",
+                                value: $settings.overtimeAnnouncementMinutes,
+                                in: 1...60,
+                                step: 1)
+                            .monospacedDigit()
+                    }
+
+                    Text("超過モード中、N 分ごとに「N minutes 超過」と音声通知します。")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
                 // ntfy Push Notification Section (iPhone)
                 Section("ntfy Push (iPhone)") {
                     Toggle("Enable ntfy Push", isOn: $settings.ntfyEnabled)
