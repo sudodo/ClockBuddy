@@ -21,7 +21,7 @@ struct DigitalClockView: View {
     }
 
     private var shouldBlinkRemaining: Bool {
-        timerModel.isRunning && (timerModel.isPaused || isTimerCritical)
+        timerModel.isRunning && !timerModel.isPaused && isTimerCritical
     }
 
     private var effectiveTimeFontSize: CGFloat {
@@ -38,6 +38,12 @@ struct DigitalClockView: View {
         }
 
         let seconds = timerModel.remainingSeconds
+
+        if timerModel.isPaused {
+            let minutes = max(1, Int(ceil(Double(seconds) / 60.0)))
+            return "⏸️ 残り\(minutes)分"
+        }
+
         if seconds <= 600 {
             return String(format: "残り%02d:%02d", seconds / 60, seconds % 60)
         }
