@@ -6,8 +6,10 @@ import Observation
 final class TimerModel {
     private(set) var isRunning = false
     private(set) var isPaused = false
+    private(set) var isOvertime = false
     private(set) var remainingSeconds: Int = 0
     private(set) var totalSeconds: Int = 0
+    private(set) var overtimeSeconds: Int = 0
     var setupSheetVisible = false
 
     @ObservationIgnored private let voicePlayer = VoicePlayer()
@@ -15,13 +17,15 @@ final class TimerModel {
     @ObservationIgnored private var endDate: Date?
     @ObservationIgnored private var pausedRemaining: Int = 0
     @ObservationIgnored private var playedMarkers: Set<Int> = []
-    @ObservationIgnored private var finishClearTask: Task<Void, Never>?
+    @ObservationIgnored private var overtimeStartDate: Date?
 
     private static let markerMinutes = [30, 15, 10, 5]
 
     func handleSingleTap(defaultMinutes: Int) {
         if !isRunning {
             start(minutes: defaultMinutes)
+        } else if isOvertime {
+            stop()
         } else if isPaused {
             resume()
         } else {
@@ -34,19 +38,20 @@ final class TimerModel {
     }
 
     func start(minutes: Int) {
-        finishClearTask?.cancel()
-        finishClearTask = nil
         totalSeconds = max(1, minutes) * 60
         remainingSeconds = totalSeconds
         endDate = Date().addingTimeInterval(TimeInterval(totalSeconds))
         playedMarkers = Set(Self.markerMinutes.filter { $0 * 60 >= totalSeconds })
         isRunning = true
         isPaused = false
+        isOvertime = false
+        overtimeSeconds = 0
+        overtimeStartDate = nil
         scheduleTimer()
     }
 
     func pause() {
-        guard isRunning, !isPaused, let endDate else { return }
+        guard isRunning, !isPaused, !isOvertime, let endDate else { return }
         pausedRemaining = max(0, Int(endDate.timeIntervalSinceNow.rounded()))
         timer?.invalidate()
         timer = nil
@@ -64,14 +69,15 @@ final class TimerModel {
     func stop() {
         timer?.invalidate()
         timer = nil
-        finishClearTask?.cancel()
-        finishClearTask = nil
         isRunning = false
         isPaused = false
+        isOvertime = false
         remainingSeconds = 0
         totalSeconds = 0
+        overtimeSeconds = 0
         endDate = nil
         pausedRemaining = 0
+        overtimeStartDate = nil
         playedMarkers.removeAll()
     }
 
@@ -85,7 +91,14 @@ final class TimerModel {
     }
 
     private func tick() {
-        guard isRunning, !isPaused, let endDate else { return }
+        guard isRunning, !isPaused else { return }
+
+        if isOvertime, let start = overtimeStartDate {
+            overtimeSeconds = max(0, Int(Date().timeIntervalSince(start).rounded()))
+            return
+        }
+
+        guard let endDate else { return }
         let remaining = max(0, Int(endDate.timeIntervalSinceNow.rounded()))
 
         for m in Self.markerMinutes where remaining <= m * 60 && !playedMarkers.contains(m) {
@@ -100,16 +113,12 @@ final class TimerModel {
     }
 
     private func finish() {
-        timer?.invalidate()
-        timer = nil
         isPaused = false
         voicePlayer.playComplete()
         NSSound(named: "Glass")?.play()
-
-        finishClearTask = Task { @MainActor in
-            try? await Task.sleep(for: .seconds(2))
-            guard !Task.isCancelled else { return }
-            stop()
-        }
+        remainingSeconds = 0
+        overtimeSeconds = 0
+        overtimeStartDate = Date()
+        isOvertime = true
     }
 }

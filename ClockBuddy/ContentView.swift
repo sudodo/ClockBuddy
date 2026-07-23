@@ -10,7 +10,7 @@ struct ContentView: View {
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
     var clockColor: Color {
-        if timerModel.isRunning && timerModel.remainingSeconds <= 600 {
+        if timerModel.isRunning && (timerModel.isOvertime || timerModel.remainingSeconds <= 600) {
             return .red
         }
         if model.hasUrgentEvents {

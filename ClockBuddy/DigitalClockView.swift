@@ -12,16 +12,16 @@ struct DigitalClockView: View {
         !settings.blinkColon || Calendar.current.component(.second, from: date) % 2 == 0
     }
 
-    private var isTimerLastTenMinutes: Bool {
-        timerModel.isRunning && timerModel.remainingSeconds <= 600
+    private var isTimerCritical: Bool {
+        timerModel.isRunning && (timerModel.isOvertime || timerModel.remainingSeconds <= 600)
     }
 
     private var shouldBlinkTime: Bool {
-        (settings.blinkBeforeEvent && model.isWithin30Minutes) || isTimerLastTenMinutes
+        (settings.blinkBeforeEvent && model.isWithin30Minutes) || isTimerCritical
     }
 
     private var shouldBlinkRemaining: Bool {
-        timerModel.isRunning && (timerModel.isPaused || isTimerLastTenMinutes)
+        timerModel.isRunning && (timerModel.isPaused || isTimerCritical)
     }
 
     private var effectiveTimeFontSize: CGFloat {
@@ -31,8 +31,14 @@ struct DigitalClockView: View {
 
     private var remainingText: String? {
         guard timerModel.isRunning else { return nil }
+
+        if timerModel.isOvertime {
+            let s = timerModel.overtimeSeconds
+            return String(format: "超過%02d:%02d", s / 60, s % 60)
+        }
+
         let seconds = timerModel.remainingSeconds
-        if isTimerLastTenMinutes {
+        if seconds <= 600 {
             return String(format: "残り%02d:%02d", seconds / 60, seconds % 60)
         }
         let minutes = Int(ceil(Double(seconds) / 60.0))
