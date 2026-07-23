@@ -4,8 +4,14 @@ import AppKit
 @main
 struct ClockBuddyApp: App {
     @State private var model = ClockModel()
-    @State private var appSettings = AppSettings()
-    @State private var timerModel = TimerModel()
+    @State private var appSettings: AppSettings
+    @State private var timerModel: TimerModel
+
+    init() {
+        let settings = AppSettings()
+        _appSettings = State(wrappedValue: settings)
+        _timerModel = State(wrappedValue: TimerModel(settings: settings))
+    }
 
     var body: some Scene {
         WindowGroup {

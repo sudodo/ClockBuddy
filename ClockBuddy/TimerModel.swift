@@ -13,13 +13,19 @@ final class TimerModel {
     var setupSheetVisible = false
 
     @ObservationIgnored private let voicePlayer = VoicePlayer()
+    @ObservationIgnored private let ntfyClient = NtfyClient()
+    @ObservationIgnored private let settings: AppSettings
     @ObservationIgnored private var timer: Timer?
     @ObservationIgnored private var endDate: Date?
     @ObservationIgnored private var pausedRemaining: Int = 0
     @ObservationIgnored private var playedMarkers: Set<Int> = []
     @ObservationIgnored private var overtimeStartDate: Date?
 
-    private static let markerMinutes = [30, 15, 10, 5]
+    static let markerMinutes = [30, 15, 10, 5]
+
+    init(settings: AppSettings) {
+        self.settings = settings
+    }
 
     func handleSingleTap(defaultMinutes: Int) {
         if !isRunning {
@@ -104,6 +110,7 @@ final class TimerModel {
         for m in Self.markerMinutes where remaining <= m * 60 && !playedMarkers.contains(m) {
             playedMarkers.insert(m)
             voicePlayer.play(minutes: m)
+            sendNtfyForMarker(minutes: m)
         }
 
         remainingSeconds = remaining
@@ -116,9 +123,29 @@ final class TimerModel {
         isPaused = false
         voicePlayer.playComplete()
         NSSound(named: "Glass")?.play()
+        sendNtfyForCompletion()
         remainingSeconds = 0
         overtimeSeconds = 0
         overtimeStartDate = Date()
         isOvertime = true
+    }
+
+    private func sendNtfyForMarker(minutes: Int) {
+        guard settings.ntfyEnabled,
+              settings.ntfyMarkerMinutes.contains(minutes) else { return }
+        ntfyClient.send(
+            serverURL: settings.ntfyServerURL,
+            topic: settings.ntfyTopic,
+            message: "ClockBuddy: 残り\(minutes)分"
+        )
+    }
+
+    private func sendNtfyForCompletion() {
+        guard settings.ntfyEnabled, settings.ntfyNotifyOnComplete else { return }
+        ntfyClient.send(
+            serverURL: settings.ntfyServerURL,
+            topic: settings.ntfyTopic,
+            message: "ClockBuddy: 作業完了"
+        )
     }
 }

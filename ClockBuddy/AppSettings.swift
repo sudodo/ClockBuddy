@@ -73,6 +73,29 @@ final class AppSettings {
         didSet { defaults.set(timerFontSize, forKey: "timerFontSize") }
     }
 
+    // ntfy push notification (iPhone) — MVP fires only at remaining 10 min and on completion.
+    // ntfyMarkerMinutes / ntfyNotifyOnComplete are stored but currently not exposed in the UI;
+    // a future settings panel can let the user pick any subset of timer markers + completion.
+    var ntfyEnabled: Bool {
+        didSet { defaults.set(ntfyEnabled, forKey: "ntfyEnabled") }
+    }
+
+    var ntfyTopic: String {
+        didSet { defaults.set(ntfyTopic, forKey: "ntfyTopic") }
+    }
+
+    var ntfyServerURL: String {
+        didSet { defaults.set(ntfyServerURL, forKey: "ntfyServerURL") }
+    }
+
+    var ntfyMarkerMinutes: [Int] {
+        didSet { defaults.set(ntfyMarkerMinutes, forKey: "ntfyMarkerMinutes") }
+    }
+
+    var ntfyNotifyOnComplete: Bool {
+        didSet { defaults.set(ntfyNotifyOnComplete, forKey: "ntfyNotifyOnComplete") }
+    }
+
     init() {
         // Load saved settings or use defaults
         self.isAnalog = defaults.object(forKey: "isAnalog") as? Bool ?? false // Digital by default
@@ -92,6 +115,11 @@ final class AppSettings {
         self.blinkBeforeEvent = defaults.object(forKey: "blinkBeforeEvent") as? Bool ?? false
         self.timerDefaultMinutes = defaults.object(forKey: "timerDefaultMinutes") as? Int ?? 60
         self.timerFontSize = defaults.object(forKey: "timerFontSize") as? CGFloat ?? 20
+        self.ntfyEnabled = defaults.object(forKey: "ntfyEnabled") as? Bool ?? false
+        self.ntfyTopic = defaults.object(forKey: "ntfyTopic") as? String ?? ""
+        self.ntfyServerURL = defaults.object(forKey: "ntfyServerURL") as? String ?? "https://ntfy.sh"
+        self.ntfyMarkerMinutes = defaults.object(forKey: "ntfyMarkerMinutes") as? [Int] ?? [10]
+        self.ntfyNotifyOnComplete = defaults.object(forKey: "ntfyNotifyOnComplete") as? Bool ?? true
     }
     
     // Computed property for window size

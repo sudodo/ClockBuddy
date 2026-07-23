@@ -170,6 +170,65 @@ struct SettingsView: View {
                     }
                 }
                 
+                // ntfy Push Notification Section (iPhone)
+                Section("ntfy Push (iPhone)") {
+                    Toggle("Enable ntfy Push", isOn: $settings.ntfyEnabled)
+
+                    HStack {
+                        Text("Topic")
+                            .frame(width: 80, alignment: .leading)
+                        TextField("e.g. clockbuddy_secret_xyz", text: $settings.ntfyTopic)
+                            .textFieldStyle(.roundedBorder)
+                            .disabled(!settings.ntfyEnabled)
+                    }
+
+                    HStack {
+                        Text("Server URL")
+                            .frame(width: 80, alignment: .leading)
+                        TextField("https://ntfy.sh", text: $settings.ntfyServerURL)
+                            .textFieldStyle(.roundedBorder)
+                            .disabled(!settings.ntfyEnabled)
+                    }
+
+                    HStack {
+                        Button("Send Test Notification") {
+                            NtfyClient().send(
+                                serverURL: settings.ntfyServerURL,
+                                topic: settings.ntfyTopic,
+                                message: "ClockBuddy: テスト通知"
+                            )
+                        }
+                        .disabled(!settings.ntfyEnabled || settings.ntfyTopic.isEmpty)
+                        Spacer()
+                    }
+
+                    Text("Topic名はパスワード相当 — 推測されにくい文字列にしてください。iPhone側で同じ Topic を ntfy アプリで購読してください。")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
+                // ntfy Notify Timing Section
+                Section("ntfy Notify Timing") {
+                    ForEach(TimerModel.markerMinutes, id: \.self) { m in
+                        Toggle("Remaining \(m) min", isOn: Binding(
+                            get: { settings.ntfyMarkerMinutes.contains(m) },
+                            set: { isOn in
+                                var set = Set(settings.ntfyMarkerMinutes)
+                                if isOn { set.insert(m) } else { set.remove(m) }
+                                settings.ntfyMarkerMinutes = TimerModel.markerMinutes.filter { set.contains($0) }
+                            }
+                        ))
+                        .disabled(!settings.ntfyEnabled)
+                    }
+
+                    Toggle("On Completion", isOn: $settings.ntfyNotifyOnComplete)
+                        .disabled(!settings.ntfyEnabled)
+
+                    Text("チェックを入れたタイミングで iPhone に push 通知が飛びます。")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+
                 // Quick Actions Section
                 Section("Quick Actions") {
                     HStack {
