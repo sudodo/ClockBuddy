@@ -113,7 +113,7 @@ struct DigitalClockView: View {
     }
 
     var body: some View {
-        VStack(spacing: 6) {
+        VStack(spacing: 2 * settings.windowScale) {
             // Time display with optional blinking colon
             HStack(spacing: 0) {
                 Text(timeComponents.hours)
@@ -216,7 +216,6 @@ struct DigitalClockView: View {
                     .opacity(0.8)
             }
         }
-        .padding(.horizontal, 20 * settings.windowScale)
-        .padding(.vertical, 15 * settings.windowScale)
+        .padding(2 * settings.windowScale)
     }
 }

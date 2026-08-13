@@ -3,6 +3,10 @@ import Observation
 
 @Observable
 final class AppSettings {
+    static let windowScaleRange: ClosedRange<CGFloat> = 0.2...2.0
+    static let analogWindowBaseSize: CGFloat = 260
+    static let timerSetupMinimumSize = CGSize(width: 220, height: 120)
+
     private let defaults: UserDefaults
     
     var isAnalog: Bool {
@@ -134,12 +138,7 @@ final class AppSettings {
         self.ntfyNotifyOnComplete = defaults.object(forKey: "ntfyNotifyOnComplete") as? Bool ?? true
     }
     
-    // Computed property for window size
-    var windowWidth: CGFloat {
-        (isAnalog ? 350 : 260) * windowScale
-    }
-    
-    var windowHeight: CGFloat {
-        (isAnalog ? 350 : 170) * windowScale
+    var analogWindowSize: CGFloat {
+        Self.analogWindowBaseSize * windowScale
     }
 }

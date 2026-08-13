@@ -87,4 +87,20 @@ struct ClockBuddyTests {
         timerModel.stop()
     }
 
+    @Test func compactWindowScalePersistsAndUsesReducedAnalogWindowMetrics() {
+        let suiteName = "ClockBuddyTests.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let settings = AppSettings(defaults: defaults)
+        settings.windowScale = AppSettings.windowScaleRange.lowerBound
+
+        #expect(abs(settings.windowScale - 0.2) < 0.001)
+        #expect(abs(settings.analogWindowSize - 52) < 0.001)
+
+        let reloadedSettings = AppSettings(defaults: defaults)
+        #expect(abs(reloadedSettings.windowScale - 0.2) < 0.001)
+        #expect(AppSettings.windowScaleRange.upperBound == 2.0)
+    }
+
 }

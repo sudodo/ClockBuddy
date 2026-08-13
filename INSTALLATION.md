@@ -49,6 +49,7 @@ On first launch:
 - The clock starts in **digital mode without seconds** (default)
 - Press `Cmd + ,` to open Settings
 - 「Pomodoro Timer > Enable Timer」でタイマー機能の ON/OFF を切り替えられます（既定は ON）
+- 「Appearance > Window Size」で時計を 20%〜200% に変更できます。デジタル時計のウインドウは表示内容に追従し、余白を最小限に保ちます
 - All settings are automatically saved
 
 ## Features

@@ -55,10 +55,10 @@ struct SettingsView: View {
                     
                     HStack {
                         Text("Window Size")
-                        Slider(value: $settings.windowScale, in: 0.5...2.0, step: 0.1) {
+                        Slider(value: $settings.windowScale, in: AppSettings.windowScaleRange, step: 0.1) {
                             Text("Window Size")
                         } minimumValueLabel: {
-                            Text("50%")
+                            Text("20%")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         } maximumValueLabel: {

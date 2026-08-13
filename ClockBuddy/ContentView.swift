@@ -9,6 +9,20 @@ struct ContentView: View {
 
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
+    private var contentWidth: CGFloat? {
+        if timerModel.setupSheetVisible {
+            return AppSettings.timerSetupMinimumSize.width
+        }
+        return settings.isAnalog ? settings.analogWindowSize : nil
+    }
+
+    private var contentHeight: CGFloat? {
+        if timerModel.setupSheetVisible {
+            return AppSettings.timerSetupMinimumSize.height
+        }
+        return settings.isAnalog ? settings.analogWindowSize : nil
+    }
+
     var clockColor: Color {
         if timerModel.isRunning && (timerModel.isOvertime || timerModel.remainingSeconds <= 600) {
             return .red
@@ -25,7 +39,7 @@ struct ContentView: View {
     var body: some View {
         ZStack {
             // Background
-            RoundedRectangle(cornerRadius: 20)
+            RoundedRectangle(cornerRadius: 20 * settings.windowScale)
                 .fill(.black.opacity(settings.windowOpacity))
 
             if timerModel.setupSheetVisible {
@@ -38,6 +52,7 @@ struct ContentView: View {
                             .scaleEffect(settings.windowScale)
                     } else {
                         DigitalClockView(date: currentDate)
+                            .fixedSize()
                     }
                 }
                 .foregroundStyle(clockColor)
@@ -46,9 +61,10 @@ struct ContentView: View {
             }
         }
         .frame(
-            width: settings.windowWidth,
-            height: settings.windowHeight + (timerModel.isRunning ? settings.timerFontSize * settings.windowScale + 10 : 0)
+            width: contentWidth,
+            height: contentHeight
         )
+        .fixedSize()
         .contentShape(Rectangle())
         .gesture(
             ExclusiveGesture(
