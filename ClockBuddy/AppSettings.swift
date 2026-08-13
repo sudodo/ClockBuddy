@@ -3,7 +3,7 @@ import Observation
 
 @Observable
 final class AppSettings {
-    private let defaults = UserDefaults.standard
+    private let defaults: UserDefaults
     
     var isAnalog: Bool {
         didSet { defaults.set(isAnalog, forKey: "isAnalog") }
@@ -65,6 +65,10 @@ final class AppSettings {
         didSet { defaults.set(blinkBeforeEvent, forKey: "blinkBeforeEvent") }
     }
 
+    var isTimerEnabled: Bool {
+        didSet { defaults.set(isTimerEnabled, forKey: "isTimerEnabled") }
+    }
+
     var timerDefaultMinutes: Int {
         didSet { defaults.set(timerDefaultMinutes, forKey: "timerDefaultMinutes") }
     }
@@ -100,7 +104,9 @@ final class AppSettings {
         didSet { defaults.set(ntfyNotifyOnComplete, forKey: "ntfyNotifyOnComplete") }
     }
 
-    init() {
+    init(defaults: UserDefaults = .standard) {
+        self.defaults = defaults
+
         // Load saved settings or use defaults
         self.isAnalog = defaults.object(forKey: "isAnalog") as? Bool ?? false // Digital by default
         self.showSecondsHand = defaults.object(forKey: "showSecondsHand") as? Bool ?? true
@@ -117,6 +123,7 @@ final class AppSettings {
         self.eventFontSize = defaults.object(forKey: "eventFontSize") as? CGFloat ?? 14
         self.showNoEventMessage = defaults.object(forKey: "showNoEventMessage") as? Bool ?? true
         self.blinkBeforeEvent = defaults.object(forKey: "blinkBeforeEvent") as? Bool ?? false
+        self.isTimerEnabled = defaults.object(forKey: "isTimerEnabled") as? Bool ?? true
         self.timerDefaultMinutes = defaults.object(forKey: "timerDefaultMinutes") as? Int ?? 60
         self.timerFontSize = defaults.object(forKey: "timerFontSize") as? CGFloat ?? 20
         self.overtimeAnnouncementMinutes = defaults.object(forKey: "overtimeAnnouncementMinutes") as? Int ?? 15

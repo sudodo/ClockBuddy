@@ -2,6 +2,7 @@ import SwiftUI
 
 struct SettingsView: View {
     @Environment(AppSettings.self) private var settings
+    @Environment(TimerModel.self) private var timerModel
     @Environment(\.dismiss) private var dismiss
     
     var body: some View {
@@ -169,6 +170,18 @@ struct SettingsView: View {
                             .frame(width: 50, alignment: .trailing)
                     }
                 }
+
+                // Pomodoro Timer Section
+                Section("Pomodoro Timer") {
+                    Toggle("Enable Timer", isOn: Binding(
+                        get: { settings.isTimerEnabled },
+                        set: { timerModel.setTimerEnabled($0) }
+                    ))
+
+                    Text("When disabled, clicking the clock will not start or configure the timer.")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
                 
                 // Timer Voice Section
                 Section("Timer Voice") {
@@ -266,6 +279,7 @@ struct SettingsView: View {
                                 settings.eventFontSize = 14
                                 settings.showNoEventMessage = true
                                 settings.blinkBeforeEvent = false
+                                timerModel.setTimerEnabled(true)
                                 settings.timerFontSize = 20
                             }
                         }

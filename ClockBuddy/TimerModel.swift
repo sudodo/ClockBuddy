@@ -28,7 +28,18 @@ final class TimerModel {
         self.settings = settings
     }
 
+    func setTimerEnabled(_ enabled: Bool) {
+        settings.isTimerEnabled = enabled
+
+        if !enabled {
+            setupSheetVisible = false
+            stop()
+        }
+    }
+
     func handleSingleTap(defaultMinutes: Int) {
+        guard settings.isTimerEnabled else { return }
+
         if !isRunning {
             start(minutes: defaultMinutes)
         } else if isOvertime {
@@ -41,10 +52,12 @@ final class TimerModel {
     }
 
     func openSetup() {
+        guard settings.isTimerEnabled else { return }
         setupSheetVisible = true
     }
 
     func start(minutes: Int) {
+        guard settings.isTimerEnabled else { return }
         totalSeconds = max(1, minutes) * 60
         remainingSeconds = totalSeconds
         endDate = Date().addingTimeInterval(TimeInterval(totalSeconds))

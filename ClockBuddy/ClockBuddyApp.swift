@@ -39,6 +39,7 @@ struct ClockBuddyApp: App {
         Settings {
             SettingsView()
                 .environment(appSettings)
+                .environment(timerModel)
         }
     }
 }

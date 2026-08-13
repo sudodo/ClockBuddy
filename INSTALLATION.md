@@ -48,11 +48,14 @@ On first launch:
 - Grant calendar access when prompted
 - The clock starts in **digital mode without seconds** (default)
 - Press `Cmd + ,` to open Settings
+- 「Pomodoro Timer > Enable Timer」でタイマー機能の ON/OFF を切り替えられます（既定は ON）
 - All settings are automatically saved
 
 ## Features
 
 - **Cmd + ,** : Open Settings
+- **Enable Timer: OFF** : 時計をクリックしてもタイマーの開始や設定画面の表示を行いません
+- **Enable Timer: ON** : 単クリックでタイマーを操作し、ダブルクリックで既定時間を設定します
 - **Drag anywhere** : Move the clock window
 - **Always on top** : Stays above other windows
 - **Calendar sync** : Pink = upcoming events, Cyan = no events
