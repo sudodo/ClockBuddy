@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import EventKit
 import Testing
 @testable import ClockBuddy
 
@@ -108,6 +109,47 @@ struct ClockBuddyTests {
         let reloadedSettings = AppSettings(defaults: defaults)
         #expect(abs(reloadedSettings.windowScale - 0.2) < 0.001)
         #expect(AppSettings.windowScaleRange.upperBound == 2.0)
+    }
+
+    @Test func calendarEventFilterHidesFreeEventsAndKeepsBusyEvents() {
+        let now = Date(timeIntervalSince1970: 1_700_000_000)
+        let future = now.addingTimeInterval(60 * 60)
+
+        #expect(!CalendarEventFilter.shouldDisplay(
+            isAllDay: false,
+            startDate: future,
+            availability: .free,
+            now: now
+        ))
+        #expect(CalendarEventFilter.shouldDisplay(
+            isAllDay: false,
+            startDate: future,
+            availability: .busy,
+            now: now
+        ))
+        #expect(CalendarEventFilter.shouldDisplay(
+            isAllDay: false,
+            startDate: future,
+            availability: .notSupported,
+            now: now
+        ))
+    }
+
+    @Test func calendarEventFilterStillHidesAllDayAndPastEvents() {
+        let now = Date(timeIntervalSince1970: 1_700_000_000)
+
+        #expect(!CalendarEventFilter.shouldDisplay(
+            isAllDay: true,
+            startDate: now.addingTimeInterval(60 * 60),
+            availability: .busy,
+            now: now
+        ))
+        #expect(!CalendarEventFilter.shouldDisplay(
+            isAllDay: false,
+            startDate: now.addingTimeInterval(-60),
+            availability: .busy,
+            now: now
+        ))
     }
 
     @Test func analogFaceStyleDefaultsToHairlineAndPersistsDots() {

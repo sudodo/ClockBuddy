@@ -2,6 +2,17 @@ import SwiftUI
 import EventKit
 import Observation
 
+enum CalendarEventFilter {
+    static func shouldDisplay(
+        isAllDay: Bool,
+        startDate: Date,
+        availability: EKEventAvailability,
+        now: Date
+    ) -> Bool {
+        !isAllDay && startDate > now && availability != .free
+    }
+}
+
 @Observable
 final class ClockModel {
     private var eventStore: EKEventStore?
@@ -65,9 +76,14 @@ final class ClockModel {
         let events = store.events(matching: predicate)
         print("Found \(events.count) total events today")
         
-        // Filter out all-day events and past events
+        // Filter out all-day, past, and calendar events marked as free.
         let upcomingEvents = events.filter { event in
-            !event.isAllDay && event.startDate > now
+            CalendarEventFilter.shouldDisplay(
+                isAllDay: event.isAllDay,
+                startDate: event.startDate,
+                availability: event.availability,
+                now: now
+            )
         }
         
         // Find the next event time and check if it's urgent

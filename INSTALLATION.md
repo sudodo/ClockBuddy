@@ -53,6 +53,7 @@ On first launch:
 - Digital選択時は「Clock Type > Show Year in Date」で年月日行の年を表示／非表示にできます
 - Analog選択時は「Clock Type > Face Style」で「Hairline」と「Dots」の2種類から文字盤を選べます（選択は次回起動時も維持されます）
 - Analog表示は背後を隠しにくいコンパクトな文字盤で、月日・曜日と次の予定（予定がなければ「今日は予定なし」）を表示します
+- Google Calendarで「予定なし（Free）」に設定したイベントは、次の予定として表示されません
 - All settings are automatically saved
 
 ## Features
