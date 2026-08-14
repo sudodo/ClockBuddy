@@ -88,48 +88,48 @@ struct AnalogClockView: View {
         ZStack {
             // Clock face
             Circle()
-                .stroke(lineWidth: 4)
-                .frame(width: 250, height: 250)
+                .stroke(lineWidth: 3)
+                .frame(width: 180, height: 180)
             
             // Hour markers
             ForEach(0..<12) { hour in
                 VStack {
                     Rectangle()
                         .fill()
-                        .frame(width: 2, height: hour % 3 == 0 ? 15 : 10)
+                        .frame(width: 2, height: hour % 3 == 0 ? 11 : 7)
                     Spacer()
                 }
-                .frame(height: 125)
+                .frame(height: 90)
                 .rotationEffect(Angle(degrees: Double(hour) * 30))
             }
             
             // Hour hand
             Rectangle()
                 .fill()
-                .frame(width: 6, height: 80)
-                .offset(y: -40)
+                .frame(width: 5, height: 56)
+                .offset(y: -28)
                 .rotationEffect(hourAngle)
             
             // Minute hand
             Rectangle()
                 .fill()
-                .frame(width: 4, height: 110)
-                .offset(y: -55)
+                .frame(width: 3, height: 78)
+                .offset(y: -39)
                 .rotationEffect(minuteAngle)
             
             // Second hand (only if enabled)
             if showSecondsHand {
                 Rectangle()
                     .fill(.red)
-                    .frame(width: 2, height: 120)
-                    .offset(y: -60)
+                    .frame(width: 2, height: 84)
+                    .offset(y: -42)
                     .rotationEffect(secondAngle)
             }
             
             // Center dot
             Circle()
                 .fill()
-                .frame(width: 12, height: 12)
+                .frame(width: 9, height: 9)
             
             // Date, weekday, and today's schedule
             VStack {
@@ -147,15 +147,15 @@ struct AnalogClockView: View {
                 }
                 .lineLimit(1)
                 .minimumScaleFactor(0.6)
-                .frame(maxWidth: 210)
-                .padding(.horizontal, 10)
-                .padding(.vertical, 5)
+                .frame(maxWidth: 160)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
                 .background(
                     RoundedRectangle(cornerRadius: 8)
                         .fill(.black.opacity(0.65))
                 )
             }
-            .padding(.bottom, 18)
+            .padding(.bottom, 8)
         }
         .frame(
             width: AppSettings.analogWindowBaseSize,

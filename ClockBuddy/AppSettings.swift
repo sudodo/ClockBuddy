@@ -4,7 +4,7 @@ import Observation
 @Observable
 final class AppSettings {
     static let windowScaleRange: ClosedRange<CGFloat> = 0.2...2.0
-    static let analogWindowBaseSize: CGFloat = 260
+    static let analogWindowBaseSize: CGFloat = 190
     static let timerSetupMinimumSize = CGSize(width: 220, height: 120)
 
     private let defaults: UserDefaults

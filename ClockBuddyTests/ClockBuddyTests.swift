@@ -103,7 +103,7 @@ struct ClockBuddyTests {
         settings.windowScale = AppSettings.windowScaleRange.lowerBound
 
         #expect(abs(settings.windowScale - 0.2) < 0.001)
-        #expect(abs(settings.analogWindowSize - 52) < 0.001)
+        #expect(abs(settings.analogWindowSize - 38) < 0.001)
 
         let reloadedSettings = AppSettings(defaults: defaults)
         #expect(abs(reloadedSettings.windowScale - 0.2) < 0.001)
