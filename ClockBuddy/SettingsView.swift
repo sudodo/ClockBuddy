@@ -32,6 +32,7 @@ struct SettingsView: View {
                     } else {
                         Toggle("Show Seconds", isOn: $settings.showSecondsDigital)
                         Toggle("Blink Colon", isOn: $settings.blinkColon)
+                        Toggle("Show Year in Date", isOn: $settings.showYear)
                     }
                 }
                 
@@ -153,7 +154,6 @@ struct SettingsView: View {
                 
                 // Event Display Section
                 Section("Event Display") {
-                    Toggle("Show Year in Date", isOn: $settings.showYear)
                     Toggle("Show \"今日は予定なし\"", isOn: $settings.showNoEventMessage)
                     Toggle("Blink Time Before Event (30 min)", isOn: $settings.blinkBeforeEvent)
                     

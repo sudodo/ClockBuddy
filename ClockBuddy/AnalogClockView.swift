@@ -1,30 +1,89 @@
 import SwiftUI
 
+enum AnalogClockHandAngles {
+    static func hour(for date: Date, calendar: Calendar = .current) -> Double {
+        let hours = calendar.component(.hour, from: date) % 12
+        let minutes = calendar.component(.minute, from: date)
+        let seconds = calendar.component(.second, from: date)
+        return Double(hours) * 30 + Double(minutes) * 0.5 + Double(seconds) / 120
+    }
+
+    static func minute(for date: Date, calendar: Calendar = .current) -> Double {
+        let minutes = calendar.component(.minute, from: date)
+        let seconds = calendar.component(.second, from: date)
+        return Double(minutes) * 6 + Double(seconds) * 0.1
+    }
+
+    static func second(for date: Date, calendar: Calendar = .current) -> Double {
+        Double(calendar.component(.second, from: date)) * 6
+    }
+}
+
+enum AnalogClockPresentation {
+    static func dateText(for date: Date, calendar: Calendar = .current) -> String {
+        let formatter = DateFormatter()
+        formatter.calendar = calendar
+        formatter.locale = Locale(identifier: "ja_JP")
+        formatter.timeZone = calendar.timeZone
+        formatter.dateFormat = "M月d日(E)"
+        return formatter.string(from: date)
+    }
+
+    static func scheduleText(
+        nextEventTime: Date?,
+        nextEventTitle: String?,
+        showNoEventMessage: Bool,
+        maxTitleLength: Int,
+        calendar: Calendar = .current
+    ) -> String? {
+        guard let nextEventTime, let nextEventTitle else {
+            return showNoEventMessage ? "今日は予定なし" : nil
+        }
+
+        let formatter = DateFormatter()
+        formatter.calendar = calendar
+        formatter.locale = Locale(identifier: "ja_JP")
+        formatter.timeZone = calendar.timeZone
+        formatter.dateFormat = "HH:mm"
+
+        let title: String
+        if nextEventTitle.count > maxTitleLength {
+            title = String(nextEventTitle.prefix(maxTitleLength)) + "..."
+        } else {
+            title = nextEventTitle
+        }
+        return "予定 \(formatter.string(from: nextEventTime)) \(title)"
+    }
+}
+
 struct AnalogClockView: View {
     let date: Date
     var showSecondsHand: Bool = true
-    
+
+    @Environment(AppSettings.self) private var settings
+    @Environment(ClockModel.self) private var model
+
     private var hourAngle: Angle {
-        let hours = Calendar.current.component(.hour, from: date) % 12
-        let minutes = Calendar.current.component(.minute, from: date)
-        let hoursInDegrees = Double(hours) * 30.0
-        let minutesInDegrees = Double(minutes) * 0.5
-        return Angle(degrees: hoursInDegrees + minutesInDegrees - 90)
+        Angle(degrees: AnalogClockHandAngles.hour(for: date))
     }
-    
+
     private var minuteAngle: Angle {
-        let minutes = Calendar.current.component(.minute, from: date)
-        let seconds = Calendar.current.component(.second, from: date)
-        let minutesInDegrees = Double(minutes) * 6.0
-        let secondsInDegrees = Double(seconds) * 0.1
-        return Angle(degrees: minutesInDegrees + secondsInDegrees - 90)
+        Angle(degrees: AnalogClockHandAngles.minute(for: date))
     }
-    
+
     private var secondAngle: Angle {
-        let seconds = Calendar.current.component(.second, from: date)
-        return Angle(degrees: Double(seconds) * 6.0 - 90)
+        Angle(degrees: AnalogClockHandAngles.second(for: date))
     }
-    
+
+    private var scheduleText: String? {
+        AnalogClockPresentation.scheduleText(
+            nextEventTime: model.nextEventTime,
+            nextEventTitle: model.nextEventTitle,
+            showNoEventMessage: settings.showNoEventMessage,
+            maxTitleLength: settings.eventNameLength
+        )
+    }
+
     var body: some View {
         ZStack {
             // Clock face
@@ -72,20 +131,31 @@ struct AnalogClockView: View {
                 .fill()
                 .frame(width: 12, height: 12)
             
-            // Date display
+            // Date, weekday, and today's schedule
             VStack {
                 Spacer()
-                    .frame(height: 180)
-                
-                Text(date, format: .dateTime.month(.abbreviated).day())
-                    .font(.system(size: 16, weight: .medium))
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 4)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(.black.opacity(0.2))
-                    )
+
+                VStack(spacing: 2) {
+                    Text(AnalogClockPresentation.dateText(for: date))
+                        .font(.system(size: settings.dateFontSize, weight: .medium))
+
+                    if let scheduleText {
+                        Text(scheduleText)
+                            .font(.system(size: settings.eventFontSize, weight: .regular))
+                            .opacity(0.85)
+                    }
+                }
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
+                .frame(maxWidth: 210)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .background(
+                    RoundedRectangle(cornerRadius: 8)
+                        .fill(.black.opacity(0.65))
+                )
             }
+            .padding(.bottom, 18)
         }
         .frame(
             width: AppSettings.analogWindowBaseSize,

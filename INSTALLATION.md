@@ -50,6 +50,8 @@ On first launch:
 - Press `Cmd + ,` to open Settings
 - 「Pomodoro Timer > Enable Timer」でタイマー機能の ON/OFF を切り替えられます（既定は ON）
 - 「Appearance > Window Size」で時計を 20%〜200% に変更できます。デジタル時計のウインドウは表示内容に追従し、余白を最小限に保ちます
+- Digital選択時は「Clock Type > Show Year in Date」で年月日行の年を表示／非表示にできます
+- Analog表示では月日・曜日と、次の予定（予定がなければ「今日は予定なし」）を文字盤内に表示します
 - All settings are automatically saved
 
 ## Features
