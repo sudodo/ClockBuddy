@@ -28,6 +28,13 @@ struct SettingsView: View {
                     .pickerStyle(.segmented)
                     
                     if settings.isAnalog {
+                        Picker("Face Style", selection: $settings.analogFaceStyle) {
+                            ForEach(AnalogFaceStyle.allCases) { style in
+                                Text(style.title).tag(style)
+                            }
+                        }
+                        .pickerStyle(.segmented)
+
                         Toggle("Show Seconds Hand", isOn: $settings.showSecondsHand)
                     } else {
                         Toggle("Show Seconds", isOn: $settings.showSecondsDigital)
@@ -266,6 +273,7 @@ struct SettingsView: View {
                             withAnimation {
                                 settings.isAnalog = false // Digital by default
                                 settings.showSecondsHand = true
+                                settings.analogFaceStyle = .hairline
                                 settings.showSecondsDigital = false // No seconds by default
                                 settings.blinkColon = false
                                 settings.windowOpacity = 0.9

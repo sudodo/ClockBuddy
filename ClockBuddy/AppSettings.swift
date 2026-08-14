@@ -1,6 +1,20 @@
 import SwiftUI
 import Observation
 
+enum AnalogFaceStyle: String, CaseIterable, Identifiable {
+    case hairline
+    case dots
+
+    var id: Self { self }
+
+    var title: String {
+        switch self {
+        case .hairline: "Hairline"
+        case .dots: "Dots"
+        }
+    }
+}
+
 @Observable
 final class AppSettings {
     static let windowScaleRange: ClosedRange<CGFloat> = 0.2...2.0
@@ -15,6 +29,10 @@ final class AppSettings {
     
     var showSecondsHand: Bool {
         didSet { defaults.set(showSecondsHand, forKey: "showSecondsHand") }
+    }
+
+    var analogFaceStyle: AnalogFaceStyle {
+        didSet { defaults.set(analogFaceStyle.rawValue, forKey: "analogFaceStyle") }
     }
     
     var showSecondsDigital: Bool {
@@ -114,6 +132,9 @@ final class AppSettings {
         // Load saved settings or use defaults
         self.isAnalog = defaults.object(forKey: "isAnalog") as? Bool ?? false // Digital by default
         self.showSecondsHand = defaults.object(forKey: "showSecondsHand") as? Bool ?? true
+        self.analogFaceStyle = AnalogFaceStyle(
+            rawValue: defaults.string(forKey: "analogFaceStyle") ?? ""
+        ) ?? .hairline
         self.showSecondsDigital = defaults.object(forKey: "showSecondsDigital") as? Bool ?? false // No seconds by default
         self.blinkColon = defaults.object(forKey: "blinkColon") as? Bool ?? false
         self.windowOpacity = defaults.object(forKey: "windowOpacity") as? Double ?? 0.9

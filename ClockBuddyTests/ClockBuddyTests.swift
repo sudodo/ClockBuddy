@@ -110,6 +110,25 @@ struct ClockBuddyTests {
         #expect(AppSettings.windowScaleRange.upperBound == 2.0)
     }
 
+    @Test func analogFaceStyleDefaultsToHairlineAndPersistsDots() {
+        let suiteName = "ClockBuddyTests.\(UUID().uuidString)"
+        let defaults = UserDefaults(suiteName: suiteName)!
+        defer { defaults.removePersistentDomain(forName: suiteName) }
+
+        let settings = AppSettings(defaults: defaults)
+        #expect(settings.analogFaceStyle == .hairline)
+
+        settings.analogFaceStyle = .dots
+        #expect(AppSettings(defaults: defaults).analogFaceStyle == .dots)
+
+        defaults.set("unsupported-style", forKey: "analogFaceStyle")
+        #expect(AppSettings(defaults: defaults).analogFaceStyle == .hairline)
+    }
+
+    @Test func analogClockLeavesLowerMarkersClearForDateAndSchedule() {
+        #expect(AnalogClockLayout.visibleMarkerHours == [0, 1, 2, 3, 4, 8, 9, 10, 11])
+    }
+
     @Test func analogClockHandsMatchNineOhFive() {
         let calendar = tokyoCalendar()
         let date = calendar.date(from: DateComponents(
@@ -130,7 +149,7 @@ struct ClockBuddyTests {
             year: 2026, month: 8, day: 14, hour: 10, minute: 30
         ))!
 
-        #expect(AnalogClockPresentation.dateText(for: date, calendar: calendar) == "8月14日(金)")
+        #expect(AnalogClockPresentation.dateText(for: date, calendar: calendar) == "8月14日 金")
         #expect(AnalogClockPresentation.scheduleText(
             nextEventTime: eventTime,
             nextEventTitle: "打ち合わせ",
